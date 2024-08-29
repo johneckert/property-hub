@@ -1,8 +1,6 @@
 require "test_helper"
 
 class BuildingTest < ActiveSupport::TestCase
-  fixtures :clients
-
   def setup
     @client = clients(:client_1)
     @custom_field_enumerator = @client.custom_fields.create!(internal_name: 'has_pool', label: 'Has Pool', field_type: :enumerator)

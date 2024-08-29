@@ -1,7 +1,2 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-custom_fields_1:
-  label: "haunted" 
-  internal_name: "haunted"
-  field_type: :enumerator 
-  client_id: <%= ActiveRecord::FixtureSet.identify(:client_1) %> 
