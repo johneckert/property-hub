@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :clients do
     member do
       get 'read_buildings'
+      post 'create_building'
     end
   end
 end
