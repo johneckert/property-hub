@@ -1,6 +1,7 @@
 class CustomField < ApplicationRecord
   belongs_to :client
   validates :label, :internal_name, :field_type, presence: true
+  validates :internal_name, uniqueness: { scope: :client_id }
   before_validation :parameterize_internal_name
   
 
