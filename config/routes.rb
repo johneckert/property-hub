@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     member do
       get 'read_buildings'
       post 'create_building'
-      put 'edit_building'
+      patch 'edit_building'
     end
   end
 end

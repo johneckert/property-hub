@@ -1,1 +1,56 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+building_1:
+  street_address: "1428 Elm Street"
+  city: "Springwood"
+  state: "OH"
+  zip: "12345"
+  custom_fields: 
+    wall_color: "blue"
+    number_of_bathrooms: 2
+  client: client_1
+building_2:
+  street_address: "742 Evergreen Terrace in Springfield"
+  city: "Springfield"
+  state: "OH"
+  zip: "12345"
+  custom_fields: 
+    wall_color: "white"
+    number_of_bathrooms: 1.5
+  client: client_1
+building_3:
+  street_address: "24700 McBean Pkwy"
+  city: "Valencia"
+  state: "CA"
+  zip: "91355"
+  custom_fields: 
+    wall_color: "pink"
+    number_of_bathrooms: 4
+  client: client_1
+building_4:
+  street_address: "221B Baker Street"
+  city: "London"
+  state: "VA"
+  zip: "32324"
+  custom_fields: 
+    wall_color: "yellow"
+    number_of_bathrooms: 1
+  client: client_1
+building_5:
+  street_address: "123 Sesame Street"
+  city: "New York"
+  state: "NY"
+  zip: "10001"
+  custom_fields: 
+    wall_color: "blue"
+    number_of_bathrooms: 2
+  client: client_1
+building_6:
+  street_address: "4 Privet Drive"
+  city: "Brooklyn"
+  state: "NY"
+  zip: "11234"
+  custom_fields: 
+    wall_color: "grey"
+    number_of_bathrooms: 2.5
+  client: client_1
