@@ -1,5 +1,6 @@
 class Building < ApplicationRecord
   belongs_to :client
+  validates :client, presence: true
 
   after_initialize :init_custom_accessors
 
