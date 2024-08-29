@@ -6,7 +6,7 @@ class ClientsController < ApplicationController
 
     render json: {
       status: "success",
-      buildings: ActiveModelSerializers::SerializableResource.new(buildings, each_serializer: BuildingSerializer),
+      data: { buildings: ActiveModelSerializers::SerializableResource.new(buildings, each_serializer: BuildingSerializer) },
       current_page: buildings.current_page,
       total_pages: buildings.total_pages,
       total_count: buildings.total_count
@@ -19,6 +19,16 @@ class ClientsController < ApplicationController
 
     if building.save
       render json: { data: BuildingSerializer.new(building), message: ['Building created successfully'], status: 201, type: 'Success' }, status: :created
+    else
+      render json: { errors: building.errors.full_messages, status: 422, type: 'Error' }, status: :unprocessable_entity
+    end
+  end
+
+  def edit_building
+    client = Client.find(params[:id])
+    building = Building.find(params[:building][:id])
+    if building.update(building_params(client))
+      render json: { data: BuildingSerializer.new(building), message: ['Building updated successfully'], status: 201, type: 'Success' }, status: :created
     else
       render json: { errors: building.errors.full_messages, status: 422, type: 'Error' }, status: :unprocessable_entity
     end
