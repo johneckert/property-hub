@@ -1,5 +1,5 @@
 class Building < ApplicationRecord
-  belongs_to :client, dependent: :delete
+  belongs_to :client
 
   after_initialize :init_custom_accessors
 

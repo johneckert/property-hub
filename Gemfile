@@ -38,6 +38,12 @@ gem "bootsnap", require: false
 
 gem 'faker'
 
+gem "minitest-reporters", "~> 1.7"
+
+gem "guard", "~> 2.18"
+
+gem "guard-minitest", "~> 2.4"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
