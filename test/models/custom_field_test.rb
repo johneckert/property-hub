@@ -1,7 +1,5 @@
 require "test_helper"
 
 class CustomFieldTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  fixtures :clients, :custom_fields
 end

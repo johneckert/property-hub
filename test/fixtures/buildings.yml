@@ -1,13 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  street_address: MyString
-  city: MyString
-  state: MyString
-  zip: MyString
-
-two:
-  street_address: MyString
-  city: MyString
-  state: MyString
-  zip: MyString
+building_1:
+  street_address: "1428 Elm St."
+  city: Springwood
+  state: OH
+  zip: 12345
+  client_id: <%= ActiveRecord::FixtureSet.identify(:client_1) %>
