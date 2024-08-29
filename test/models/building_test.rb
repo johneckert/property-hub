@@ -1,7 +1,7 @@
 require "test_helper"
 
 class BuildingTest < ActiveSupport::TestCase
-  fixtures :clients, :buildings
+  fixtures :clients
 
   def setup
     @client = clients(:client_1)
@@ -14,7 +14,7 @@ class BuildingTest < ActiveSupport::TestCase
 
   test 'should not save building without client' do
     building = Building.new(street_address: '742 Evergreen Terrace', city: 'Springfield', state: 'OH', zip: '12345')
-    assert_not building.save, 'Saved the building without a client'
+    assert_not building.valid?, 'Saved the building without a client'
   end
 
   test 'should define accessors for custom fields' do
