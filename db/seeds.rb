@@ -13,7 +13,7 @@ c3 = Client.create(name: Faker::Company.name)
 c4 = Client.create(name: Faker::Company.name)
 c5 = Client.create(name: Faker::Company.name)
 
-custom1= CustomField.create( label: "Number of Bathrooms", internal_name: "numberOfBathrooms", client: c1, field_type: :number)
+custom1= CustomField.create( label: "Number of Bathrooms", internal_name: "number_of_bathrooms", client: c1, field_type: :number)
 custom2= CustomField.create( label: "Wall Color", internal_name: "wall-color", client: c1, field_type: :freeform)
 custom3= CustomField.create( label: "Has Pool", internal_name: "hasPool?", client: c2 , field_type: :enumerator)
 custom4= CustomField.create( label: "historic", internal_name: "historic", client: c2, field_type: :enumerator)

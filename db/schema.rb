@@ -36,7 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_29_213412) do
   create_table "custom_fields", force: :cascade do |t|
     t.string "label", null: false
     t.string "internal_name", null: false
-    t.string "field_type", limit: 2, default: "0", null: false
+    t.integer "field_type", limit: 2, default: 0, null: false
     t.bigint "client_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
