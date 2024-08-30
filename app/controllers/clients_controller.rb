@@ -8,7 +8,7 @@ class ClientsController < ApplicationController
 
   def read_buildings
     begin
-      buildings = @client.buildings.page(params[:page]).per(params[:per_page] || 25)
+      buildings = @client.buildings.includes(client: :custom_fields).page(params[:page]).per(params[:per_page] || 25)
 
       render json: {
         status: "success",
