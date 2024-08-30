@@ -22,11 +22,12 @@ class ClientsController < ApplicationController
   end
 
   def create_building
-    building = @client.buildings.new(create_building_params)
+    building = @client.buildings.new(building_params)
     save_building(building, 'Building created successfully')
   end
+
   def edit_building
-    @building.assign_attributes(edit_building_params)
+    @building.assign_attributes(building_params)
 
     if @building.valid?
       save_building(@building, 'Building updated successfully')
@@ -45,35 +46,12 @@ class ClientsController < ApplicationController
     @building = Building.find(params[:building][:id])
   end
 
-  def create_building_params
-    custom_fields_params = params.require(:building).permit(*@client.custom_fields.pluck(:internal_name)).to_h
-    building_params = params.require(:building).permit(:street_address, :city, :state, :zip)
-    building_params.merge(custom_fields: custom_fields_params)
-  end
+  def building_params
+    permitted_attributes = [:street_address, :city, :state, :zip]
+    custom_field_names = @client.custom_fields.pluck(:internal_name).map(&:to_sym)
 
-  def edit_building_params
-    begin
-      # Define which attributes are permitted
-      permitted_attributes = [:street_address, :city, :state, :zip]
-      
-      # Dynamically include custom field names associated with the client
-      custom_field_names = @client.custom_fields.pluck(:internal_name).map(&:to_sym)
-      
-      # Permit basic attributes and dynamically created custom fields
-      params.require(:building).permit(*permitted_attributes, *custom_field_names).tap do |permitted|
-        # Ensure `custom_fields` are properly nested within the hash
-        custom_fields_hash = {}
-        custom_field_names.each do |field_name|
-          if params[:building].key?(field_name)
-            custom_fields_hash[field_name] = params[:building][field_name]
-          end
-        end
-        permitted[:custom_fields] = custom_fields_hash unless custom_fields_hash.empty?
-      end
-    rescue ActionController::UnpermittedParameters => e
-      # Handle unpermitted parameters error gracefully
-      render json: { error: "Unpermitted parameters: #{e.params.join(', ')}" }, status: :unprocessable_entity
-    end
+    custom_fields = params.require(:building).permit(*custom_field_names).to_h
+    params.require(:building).permit(*permitted_attributes).merge(custom_fields: custom_fields)
   end
 
   def save_building(building, success_message)
