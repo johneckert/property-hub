@@ -3,6 +3,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  root "buildings#index"
+
+  get "/buildings", to: "buildings#index", as: "buildings_index"
 
   resources :clients do
     member do
