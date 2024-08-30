@@ -21,6 +21,8 @@ class Building < ApplicationRecord
   end
 
   def validate_custom_fields
+    return unless client
+  
     client.custom_fields.each do |custom_field|
       next unless custom_fields.key?(custom_field.internal_name)
 
@@ -28,6 +30,15 @@ class Building < ApplicationRecord
 
       if custom_field.enumerator? && !custom_field.choices.include?(value)
         errors.add(custom_field.internal_name, "is not a valid choice")
+      end
+  
+      case custom_field.field_type
+      when "number"
+        validate_number_field(custom_field.internal_name, value)
+      when "freeform"
+        validate_freeform_field(custom_field.internal_name, value)
+      when "enumerator"
+        validate_enumerator_field(custom_field.internal_name, value)
       end
     end
   end
