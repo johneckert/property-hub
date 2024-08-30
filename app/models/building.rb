@@ -4,6 +4,8 @@ class Building < ApplicationRecord
 
   after_initialize :init_custom_accessors
 
+  validate :validate_custom_fields
+
   private
 
   def init_custom_accessors
@@ -15,6 +17,36 @@ class Building < ApplicationRecord
     # Dynamically define accessors for each custom field
     self.singleton_class.class_eval do
       store_accessor :custom_fields, *fields
+    end
+  end
+
+  def validate_custom_fields
+    client.custom_fields.each do |custom_field|
+      next unless custom_fields.key?(custom_field.internal_name)
+
+      value = custom_fields[custom_field.internal_name]
+
+      if custom_field.enumerator? && !custom_field.choices.include?(value)
+        errors.add(custom_field.internal_name, "is not a valid choice")
+      end
+    end
+  end
+
+  def validate_number_field(field_name, value)
+    unless value.is_a?(Numeric)
+      errors.add(:custom_fields, "#{field_name} must be a number")
+    end
+  end
+
+  def validate_freeform_field(field_name, value)
+    unless value.is_a?(String)
+      errors.add(:custom_fields, "#{field_name} must be a string")
+    end
+  end
+
+  def validate_enumerator_field(field_name, value)
+    unless value.is_a?(String)
+      errors.add(:custom_fields, "#{field_name} must be a string")
     end
   end
 end

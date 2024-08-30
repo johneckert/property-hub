@@ -7,6 +7,5 @@ class CreateCustomFields < ActiveRecord::Migration[7.0]
       t.belongs_to :client, null: false, foreign_key: { delete: :cascade }
       t.timestamps
     end
-    add_index :custom_fields, %i[internal_name], unique: true
   end
 end
