@@ -1,2 +1,20 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
+color:
+  label: "Color"
+  internal_name: "color"
+  field_type: 1
+  client: client_1
+
+floor_count:
+  label: "Floor Count"
+  internal_name: "floor_count"
+  field_type: 0
+  client: client_1
+
+has_pool:
+  label: "Has Pool"
+  internal_name: "has_pool"
+  field_type: 2
+  choices: ["true", "false"]
+  client: client_1

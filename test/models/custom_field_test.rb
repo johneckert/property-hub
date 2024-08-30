@@ -28,8 +28,34 @@ class CustomFieldTest < ActiveSupport::TestCase
     assert_includes @custom_field.errors[:field_type], "can't be blank"
   end
 
+  test "should require choices for enumerator field_type" do
+    @custom_field.field_type = "enumerator"
+    @custom_field.choices = nil
+    assert_not @custom_field.valid?
+    assert_includes @custom_field.errors[:choices], "must be a non-empty array when field type is 'enumerator'"
+  end
+  
+  test "should validate choices as an array when field_type is enumerator" do
+    @custom_field.field_type = "enumerator"
+    @custom_field.choices = "not_an_array"
+    assert_not @custom_field.valid?
+    assert_includes @custom_field.errors[:choices], "must be a non-empty array when field type is 'enumerator'"
+  end
+
+  test "should allow blank choices for non-enumerator field_type" do
+    @custom_field.field_type = "freeform"
+    @custom_field.choices = nil
+    assert @custom_field.valid?
+  end
+
   test "should parameterize internal_name before validation" do
     @custom_field.internal_name = "Test Field Name"
+    @custom_field.valid?
+    assert_equal "test_field_name", @custom_field.internal_name
+  end
+
+  test "should handle unusual characters in internal_name" do
+    @custom_field.internal_name = "Test Field!@#Name"
     @custom_field.valid?
     assert_equal "test_field_name", @custom_field.internal_name
   end

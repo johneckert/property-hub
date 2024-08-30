@@ -3,6 +3,7 @@ class ClientsController < ApplicationController
   before_action :find_client, only: [:read_buildings, :create_building, :edit_building]
   before_action :find_building, only: [:edit_building]
   rescue_from ActionController::UnpermittedParameters, with: :handle_unpermitted_parameters
+  rescue_from ActiveRecord::RecordNotFound, with: :handle_record_not_found
 
 
   def read_buildings
@@ -68,5 +69,9 @@ class ClientsController < ApplicationController
 
   def handle_unpermitted_parameters(exception)
     render json: { error: "Unpermitted parameters: #{exception.params.join(', ')}" }, status: :unprocessable_entity
+  end
+
+  def handle_record_not_found(exception)
+    render json: { error: "Record not found: #{exception.message}" }, status: :not_found
   end
 end
