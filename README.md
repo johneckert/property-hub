@@ -31,7 +31,7 @@ These instructions will help you set up and run the PropertyHub API on your loca
 
 ```bash
   git clone https://github.com/johneckert/property-hub.git
-  cd propertyhub
+  cd property-hub
 ```
 
 2. Install dependencies:
@@ -40,8 +40,7 @@ These instructions will help you set up and run the PropertyHub API on your loca
 ```
 
 ### Configuration
-- Set up environment variables by creating a .env file based on .env.example.
-- Update configuration files in config/database.yml with your PostgreSQL credentials.
+- Update configuration files in config/database.yml with your PostgreSQL credentials if required.
 
 ### Database Setup
 
