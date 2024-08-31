@@ -83,6 +83,33 @@ The API provides the following endpoints:
 * Index pages support pagination with the following query parameters: page and per_page. 
 eg: http://localhost:3000/buildings?page=1&per_page=10
 
+- Example request to create a building:
+```json
+{
+  "building": {
+    "street_address": "666 Sesame St.",
+    "city": "Buffalo",
+    "state": "NY",
+    "zip": "11231",
+    "wall_color": "blue",
+    "number_of_bathrooms": 5,
+    "pet_friendly": "Yes",
+  }
+}
+```
+
+- Example request to update a building:
+```json
+{
+  "building": {
+    "id": 99,
+    "zip": "14226",
+    "wall_color": "blue",
+    "number_of_bathrooms": 4,
+  }
+}
+```
+
 ### Testing
 
 - To run the test suite:
